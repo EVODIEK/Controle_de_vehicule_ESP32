@@ -7,31 +7,6 @@
     - ESP32Servo
   Board à sélectionner dans l'IDE Arduino : "XIAO_ESP32S3"
 
-  POURQUOI CETTE VERSION (sans LittleFS) :
-  Le HTML est embarqué directement dans ce fichier .ino sous forme de texte
-  (variable INDEX_HTML), servi directement en mémoire flash (PROGMEM).
-  Plus besoin du dossier /data, ni de l'outil "LittleFS Data Upload"
-  (souvent instable selon la version de l'IDE Arduino) : un seul fichier
-  à uploader, un seul bouton "Téléverser", et c'est tout.
-
-  ⚠️ POINT CRITIQUE MATÉRIEL — la XIAO ESP32S3 fonctionne en logique 3.3V,
-  ses GPIO ne sont PAS tolérants au 5V. Le HC-SR04 renvoie un signal ECHO
-  en 5V : il faut un pont diviseur de tension (ex. 1kΩ + 2kΩ) sur chaque
-  broche ECHO avant de la relier à la carte, sous peine de l'endommager.
-  TRIG peut rester en direct (c'est une sortie de la carte, pas un souci).
-
-  ⚠️ COMMENT TESTER CORRECTEMENT (ce qui expliquait "pas de changement" hier) :
-  1. Flashe ce firmware sur la XIAO ESP32S3.
-  2. Sur ton téléphone/PC, connecte-toi au réseau WiFi "ROVER" (mot de
-     passe "rover1234") — PAS ton WiFi habituel.
-  3. Ouvre un navigateur et va sur http://192.168.4.1 (pas de fichier
-     local, pas de Live Server : c'est la carte elle-même qui sert la page).
-  4. Le point en haut à gauche doit passer au CYAN (connecté) — s'il reste
-     rouge, tu n'es pas sur le bon réseau WiFi ou l'IP est incorrecte.
-  Tant que tu ouvres le fichier HTML seul dans un navigateur sans carte
-  connectée, l'appli tourne volontairement en mode SIMULATION (chiffres
-  fictifs qui varient tout seuls) pour permettre de tester l'interface
-  sans matériel — c'est normal, pas une erreur.
 */
 
 #include <WiFi.h>
